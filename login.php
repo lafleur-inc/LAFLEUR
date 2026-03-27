@@ -1,26 +1,38 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="utf-8"/>
-    </head>
-    <body>
-        <?php
-        include 'connexion.php';
-        /**
-         * Ce fichier gère l'affichage du formulaire de connexion. Il vérifie si la variable de session 'connexion' est définie, si ce n'est pas le cas, elle est initialisée à 0 pour indiquer que l'utilisateur n'est pas connecté. Ensuite, un formulaire de connexion est affiché avec des champs pour l'identifiant et le mot de passe. Lorsque l'utilisateur soumet le formulaire, les données sont envoyées à login2.php pour être traitées et vérifier les informations d'identification de l'utilisateur.
-         *
-* @var int $_SESSION['connexion'] C'est une variable de session qui indique si l'utilisateur est connecté ou non. Si la valeur est 1, cela signifie que l'utilisateur est connecté, sinon il n'est pas connecté.
+<?php
+include 'connexion.php';
+
+/**
+* @var string $login C'est le nom d'utilisateur saisi par l'utilisateur dans le formulaire de connexion
+* @var string $mdp C'est le mot de passe saisi par l'utilisateur dans le formulaire de connexion
 */
-        if (!isset($_SESSION['connexion'])) {
-            $_SESSION['connexion'] = 0;
-        }
-        ?>
-        <H1>Identification : </H1>
-        <form action="login2.php" method="GET" id="">
-            <p>Identifiant : <input type="text" value="" name="login"></p>
-            <p>Mot de passe  : <input type="password" value="" name="mdp"></p>
-            <input type="submit" value="envoyer">
-            <input type="reset" value="annuler">
-        </form>
-    </body>
-</html>
+$login = $_REQUEST['login'];
+$mdp = $_REQUEST['mdp'];
+
+/**
+* @var string $sql C'est la requete SQL qui sélectionne les informations de l'utilisateur correspondant au nom d'utilisateur saisi
+* @var PDOStatement $requete C'est la requete préparée qui va être exécutée pour récupérer les informations de l'utilisateur correspondant au nom d'utilisateur saisi
+* @var array $user C'est un tableau associatif qui contient les informations de l'utilisateur récupérées à partir de la base de données. Si l'utilisateur existe, le tableau contiendra les informations de l'utilisateur, sinon il sera vide
+*/
+
+$sql = 'SELECT * FROM member WHERE username = :login';
+$requete = $connection->prepare($sql);
+$requete->execute([':login' => $login]);
+$user = $requete->fetch(PDO::FETCH_ASSOC);
+
+/**
+* Si l'utilisateur existe, la fonction password_verify() est utilisée pour vérifier si le mot de passe saisi correspond au mot de passe stocké dans la base de données. Si les mots de passe correspondent, les variables de session sont définies pour indiquer que l'utilisateur est connecté et pour stocker le nom d'utilisateur. Si les mots de passe ne correspondent pas ou si l'utilisateur n'existe pas, la variable de session 'connexion' est définie sur 0 pour indiquer que l'utilisateur n'est pas connecté
+*/
+if ($user) {
+    if (password_verify($mdp, $user['password'])) {
+        $_SESSION['login'] = $login;
+        $_SESSION['connexion'] = 1;
+    } else {
+        $_SESSION['connexion'] = 0;
+    }
+} else {
+    $_SESSION['connexion'] = 0;
+}
+
+header('Location: formulaire.php');
+exit();
+?>
