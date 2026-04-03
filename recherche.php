@@ -6,7 +6,7 @@ $results = [];
 if (isset($_GET['search']) && !empty(trim($_GET['search']))) {
     $recherche = trim($_GET['search']);
 
-    $sql = "SELECT * FROM ta_table WHERE titre LIKE :recherche";
+    $sql = "SELECT * FROM produits WHERE titre LIKE :recherche";
     $stmt = $connection->prepare($sql);
     $stmt->execute(['recherche' => '%' . $recherche . '%']);
     $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -24,7 +24,7 @@ if (isset($_GET['search']) && !empty(trim($_GET['search']))) {
 <body>
     <header class="header">
         <div class="header-content">
-            <a href="index.php" class="logo">La<span class="logo-pink">Fleur</span></a>
+            <a href="accueilLafleur.php" class="logo">La<span class="logo-pink">Fleur</span></a>
         </div>
     </header>
 
