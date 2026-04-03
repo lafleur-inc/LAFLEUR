@@ -1,4 +1,7 @@
-
+<?php
+    include 'connexion.php';
+    require 'check.php';
+?>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -11,7 +14,6 @@
     <header class="header">
     <div class="header-content">
         <a href="index.php" class="logo">La<span class="logo-pink">Fleur</span></a>
-        
         <!-- Bloc du bouton de connexion -->
         <div>
             <?php if (isset($_SESSION['connexion']) && $_SESSION['connexion'] == 1): ?>
@@ -19,7 +21,7 @@
                 <span style="margin-right: 15px; color: #6b7280; font-weight: bold;">
                     Bonjour, <?php echo htmlspecialchars($_SESSION['login']); ?>
                 </span>
-                <a href="logout.php" style="padding: 8px 15px; background-color: #6b7280; color: white; text-decoration: none; border-radius: 4px; font-weight: bold; transition: 0.3s;">
+                <a href="deconnexion.php" style="padding: 8px 15px; background-color: #6b7280; color: white; text-decoration: none; border-radius: 4px; font-weight: bold; transition: 0.3s;">
                     Déconnexion
                 </a>
             <?php else: ?>

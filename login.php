@@ -12,20 +12,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // TRAITEMENT DE L'INSCRIPTION
     // ==========================================
     if (isset($_POST['action']) && $_POST['action'] === 'inscription') {
-        $username = trim($_POST['username']);
+        $nom = trim($_POST['nom']);
         $email = trim($_POST['email']);
         $mdp = $_POST['mdp'];
 
-        $check = $connection->prepare("SELECT username FROM member WHERE username = :username OR email = :email");
-        $check->execute([':username' => $username, ':email' => $email]);
+        $check = $connection->prepare("SELECT nom FROM utilisateur WHERE nom = :nom OR email = :email");
+        $check->execute([':nom' => $nom, ':email' => $email]);
         
         if ($check->rowCount() > 0) {
             $message = "<div style='color:#721c24; background:#f8d7da; padding:15px; text-align:center;'>Ce nom d'utilisateur ou cet email est déjà utilisé.</div>";
         } else {
             $mdp_hashe = password_hash($mdp, PASSWORD_DEFAULT);
-            $insert = $connection->prepare("INSERT INTO member (username, email, password) VALUES (:username, :email, :password)");
+            $insert = $connection->prepare("INSERT INTO utilisateur (nom, email, mot_de_passe) VALUES (:nom, :email, :mot_de_passe)");
             
-            if ($insert->execute([':username' => $username, ':email' => $email, ':password' => $mdp_hashe])) {
+            if ($insert->execute([':nom' => $nom, ':email' => $email, ':mot_de_passe' => $mdp_hashe])) {
                 $message = "<div style='color:#155724; background:#d4edda; padding:15px; text-align:center;'>Compte créé avec succès ! Vous pouvez maintenant vous connecter.</div>";
             } else {
                 $message = "<div style='color:#721c24; background:#f8d7da; padding:15px; text-align:center;'>Erreur lors de la création du compte.</div>";
@@ -40,16 +40,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $login = $_POST['login']; 
         $mdp = $_POST['mdp'];     
 
-        $sql = 'SELECT * FROM member WHERE username = :login';
+        $sql = 'SELECT * FROM utilisateur WHERE nom = :login';
         $requete = $connection->prepare($sql);
         $requete->execute([':login' => $login]);
         $user = $requete->fetch(PDO::FETCH_ASSOC);
 
         if ($user) {
-            if (password_verify($mdp, $user['password'])) {
-                $_SESSION['login'] = $user['username']; 
+            if (password_verify($mdp, $user['mot_de_passe'])) {
+                $_SESSION['login'] = $user['nom'];
                 $_SESSION['connexion'] = 1;
-                header('Location: formulaire.php');
+                header('Location: index.php');
                 exit();
             } else {
                 $_SESSION['connexion'] = 0;
@@ -119,7 +119,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         <input type="hidden" name="action" value="inscription">
                         
                         <label style="display:block; margin-bottom:5px; color:#6b7280;">Nom d'utilisateur</label>
-                        <input type="text" name="username" required>
+                        <input type="text" name="nom" required>
 
                         <label style="display:block; margin-bottom:5px; color:#6b7280;">Email</label>
                         <input type="email" name="email" required>
