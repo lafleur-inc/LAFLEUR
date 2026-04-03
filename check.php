@@ -4,9 +4,9 @@
 * @var $_SESSION['connexion'] int
 * @var $_SESSION['login'] string
 */
+session_start();
 if (isset($_SESSION['connexion']) && $_SESSION['connexion'] == 1) {
-} else {
-    header('Location: login.php');
+    echo "Bonjour, " . htmlspecialchars($_SESSION['login']) . " !";
 }
-echo "Bienvenue " . $_SESSION['login'] . " !";
+
 ?>
