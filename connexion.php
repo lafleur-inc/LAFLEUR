@@ -9,9 +9,9 @@
 * @throws Exception Si la connexion à la base de données échoue, une exception est levée avec un message d'erreur
 */
 try {
-    $dns = 'mysql:host=localhost:3307;dbname=lafleurrr;charset=utf8';
-    $utilisateur = 'root';
-    $motDePasse = '';
+    $dns = 'mysql:host=172.20.33.11:3307;dbname=lafleurrr;charset=utf8';
+    $utilisateur = 'sio1';
+    $motDePasse = '123456789';
     $connection = new PDO($dns, $utilisateur, $motDePasse);
     $connection->query("SET NAMES utf8");
 } catch (Exception $e) {
