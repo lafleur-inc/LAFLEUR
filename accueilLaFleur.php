@@ -8,15 +8,16 @@
             <title>Page d'accueil La Fleur</title>
             <link rel="stylesheet" href="style.css">
         </head>
-        <body>
+        <header>
             <h1>Recherche dans notre catalogue de fleurs</h1>
+            <a href="login.php">connexion</a>
+        </header>
+        <body>
             <nav>
-                <label for="toggle">☰</label>
-                <input type="checkbox" id="toggle">
                 <div class="main_pages">
-                    <a href="#">Accueil</a>
-                    <a href="#">Actualité</a>
-                    <a href="#">Contact</a>
+                    <a href="#">Rosier</a>
+                    <a href="#">Plantes à massif</a>
+                    <a href="#">Bulbes</a>
                 </div>
             </nav>
         </body>

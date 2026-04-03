@@ -1,5 +1,5 @@
 <?php
-include 'connexion.php';
+//include 'connexion.php';
 
 /**
 * @var string $login C'est le nom d'utilisateur saisi par l'utilisateur dans le formulaire de connexion
