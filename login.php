@@ -49,7 +49,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             if (password_verify($mdp, $user['mot_de_passe'])) {
                 $_SESSION['login'] = $user['nom'];
                 $_SESSION['connexion'] = 1;
-                header('Location: index.php');
+                header('Location: accueilLaFleur.php');
                 exit();
             } else {
                 $_SESSION['connexion'] = 0;
@@ -76,7 +76,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <!-- L'en-tête issu de votre CSS -->
     <div class="header">
         <div class="header-content">
-            <a href="index.php" class="logo">MaBoutique<span class="logo-pink">Fleurs</span></a>
+            <a href="accueilLaFleur.php" class="logo">MaBoutique<span class="logo-pink">Fleurs</span></a>
         </div>
     </div>
 
