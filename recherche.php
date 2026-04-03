@@ -42,9 +42,20 @@ if (isset($_GET['search']) && !empty(trim($_GET['search']))) {
 
                 <?php if (count($results) > 0): ?>
                     <?php foreach ($results as $row): ?>
-                        <div class="result-item">
-                            <strong><?php echo htmlspecialchars($row['titre']); ?></strong>
-                            <p><?php echo htmlspecialchars($row['description']); ?></p>
+                        <div class="result-item" style="display: flex; gap: 15px; align-items: center;">
+                            
+                            <img src="image/<?php echo htmlspecialchars($row['photo']); ?>" alt="<?php echo htmlspecialchars($row['designation']); ?>" style="width: 80px; height: 80px; object-fit: cover; border-radius: 8px;">
+                            
+                            <div>
+                                <strong>
+                                    <a href="produit.php?id=<?php echo htmlspecialchars($row['reference']); ?>" style="color: #333; text-decoration: none; font-size: 1.2rem;">
+                                        <?php echo htmlspecialchars($row['designation']); ?>
+                                    </a>
+                                </strong>
+                                <p style="color: #ec4899; font-weight: bold; margin: 5px 0;"><?php echo htmlspecialchars($row['prix']); ?> €</p>
+                                <a href="produit.php?id=<?php echo htmlspecialchars($row['reference']); ?>" style="color: #6b7280; font-size: 0.9rem; text-decoration: underline;">Voir le produit</a>
+                            </div>
+                            
                         </div>
                     <?php endforeach; ?>
                 <?php else: ?>
