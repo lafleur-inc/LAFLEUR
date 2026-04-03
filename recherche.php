@@ -1,21 +1,13 @@
 <?php
-// --- 1. INCLUSION DE TA CONNEXION ---
 require_once 'connexion.php'; 
 
 $results = [];
 
-// On vérifie si une recherche a été lancée
 if (isset($_GET['search']) && !empty(trim($_GET['search']))) {
     $recherche = trim($_GET['search']);
 
-    // --- 2. REQUÊTE SQL ---
-    // Modifie 'ta_table' et 'titre' selon la structure de ta base 'lafleurrr'
     $sql = "SELECT * FROM ta_table WHERE titre LIKE :recherche";
-    
-    // On utilise TA variable $connection définie dans ton fichier
     $stmt = $connection->prepare($sql);
-
-    // On ajoute les % pour chercher les termes qui contiennent le mot-clé
     $stmt->execute(['recherche' => '%' . $recherche . '%']);
     $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
@@ -26,7 +18,7 @@ if (isset($_GET['search']) && !empty(trim($_GET['search']))) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Recherche dans Lafleurrr</title>
+    <title>Recherche dans Lafleur</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>

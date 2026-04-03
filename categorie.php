@@ -1,4 +1,3 @@
-
 <?php
 $category_id = $_GET['id'] ?? '';
 
@@ -47,32 +46,7 @@ if (!$category) { header('Location: index.php'); exit; }
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>LaFleur - <?php echo $category['name']; ?></title>
-    <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: Arial, sans-serif; background: #f9fafb; }
-        .header { background: white; box-shadow: 0 2px 5px rgba(0,0,0,0.1); padding: 1rem 2rem; }
-        .header-content { max-width: 1200px; margin: 0 auto; }
-        .logo { font-size: 1.8rem; font-weight: bold; text-decoration: none; color: #333; }
-        .logo-pink { color: #ec4899; }
-        .container { max-width: 1200px; margin: 0 auto; padding: 2rem; }
-        .back { display: inline-block; color: #6b7280; text-decoration: none; margin-bottom: 2rem; }
-        .back:hover { color: #ec4899; }
-        .hero { position: relative; height: 300px; border-radius: 15px; overflow: hidden; margin-bottom: 2rem; }
-        .hero img { width: 100%; height: 100%; object-fit: cover; }
-        .hero-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.7), rgba(0,0,0,0.2)); display: flex; align-items: center; justify-content: center; flex-direction: column; color: white; }
-        .hero-overlay h1 { font-size: 3rem; margin-bottom: 1rem; }
-        .hero-overlay p { font-size: 1.2rem; }
-        .products { margin-top: 2rem; }
-        .products h2 { font-size: 2rem; margin-bottom: 1rem; }
-        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 1.5rem; margin-top: 2rem; }
-        .card { background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
-        .card img { width: 100%; height: 200px; object-fit: cover; }
-        .card-body { padding: 1.5rem; }
-        .card-body h3 { font-size: 1.2rem; margin-bottom: 0.5rem; }
-        .card-body p { color: #6b7280; font-size: 0.9rem; margin-bottom: 1rem; }
-        .price { font-size: 1.5rem; color: #ec4899; font-weight: bold; }
-        .footer { background: #1f2937; color: #9ca3af; text-align: center; padding: 3rem; margin-top: 4rem; }
-    </style>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <header class="header">
@@ -83,7 +57,7 @@ if (!$category) { header('Location: index.php'); exit; }
 
     <div class="container">
         <a href="index.php" class="back">← Retour aux catégories</a>
-       
+        
         <div class="hero">
             <img src="<?php echo $category['image']; ?>" alt="<?php echo $category['name']; ?>">
             <div class="hero-overlay">
@@ -95,7 +69,7 @@ if (!$category) { header('Location: index.php'); exit; }
         <div class="products">
             <h2>Nos Produits</h2>
             <p style="color: #6b7280;"><?php echo count($category['products']); ?> produits disponibles</p>
-           
+            
             <div class="grid">
                 <?php foreach ($category['products'] as $product): ?>
                     <div class="card">
@@ -116,4 +90,3 @@ if (!$category) { header('Location: index.php'); exit; }
     </footer>
 </body>
 </html>
-
