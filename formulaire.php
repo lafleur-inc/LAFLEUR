@@ -21,13 +21,13 @@ if ($_SESSION['connexion'] == 1) {
             <h1>FNAC</h1>
             <legend >Que souhaitez vous faire ? </legend> <br>
                 <form action="" method="post">
-                        <input type="radio" name="choix" value="0" checked> Rechercher un livre<br>
+                        <input type="radio" name="choix" value="0" checked> Rechercher une fleur<br>
                         <?php
                         if ($_SESSION['connexion'] == 1) {
-                                echo '<input type="radio" name="choix" value="1" checked> Modifier un livre dans le 
+                                echo '<input type="radio" name="choix" value="1" checked> Modifier une fleur dans le 
                                 catalogue<br>';
-                                echo '<input type="radio" name="choix" value="2"> Ajouter un livre<br>';
-                                echo '<input type="radio" name="choix" value="3"> Supprimer un livre<br>';
+                                echo '<input type="radio" name="choix" value="2"> Ajouter une fleur<br>';
+                                echo '<input type="radio" name="choix" value="3"> Supprimer une fleur<br>';
                         }
                         ?>
                     <br>
