@@ -6,7 +6,7 @@ $results = [];
 if (isset($_GET['search']) && !empty(trim($_GET['search']))) {
     $recherche = trim($_GET['search']);
 
-    $sql = "SELECT * FROM produits WHERE titre LIKE :recherche";
+    $sql = "SELECT * FROM produit WHERE designation LIKE :recherche";
     $stmt = $connection->prepare($sql);
     $stmt->execute(['recherche' => '%' . $recherche . '%']);
     $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
