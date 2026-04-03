@@ -26,7 +26,7 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
 <body>
     <header class="header">
         <div class="header-content">
-            <a href="index.php" class="logo">La<span class="logo-pink">Fleur</span></a>
+            <a href="accueilLafleur.php" class="logo">La<span class="logo-pink">Fleur</span></a>
         </div>
     </header>
 
@@ -45,9 +45,9 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
             </div>
         <?php else: ?>
             <div class="error-message">
-                <h2>Oups ! Produit introuvable.</h2>
-                <p>Le produit que vous cherchez n'existe pas ou a été retiré.</p>
-                <a href="recherche.php">Retour à l'accueil</a>
+                <h2>Produit introuvable.</h2>
+                <p>Le produit que vous cherchez n'existe pas</p>
+                <a href="recherche.php">Retour à la page de recherche</a>
             </div>
         <?php endif; ?>
     </main>
