@@ -45,6 +45,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if ($user) {
             if (password_verify($mdp, $user['mot_de_passe'])) {
                 $_SESSION['login'] = $user['nom'];
+                $_SESSION['role'] = $user['role'] ?? 'user';
                 $_SESSION['connexion'] = 1;
                 header('Location: accueilLaFleur.php');
                 exit();
