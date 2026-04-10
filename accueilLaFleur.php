@@ -1,26 +1,25 @@
 <?php
-    include 'connexion.php';
+    require_once 'connexion.php';
 
+    $mode = 'categories';
     $results = [];
-    $recherche = ''; // On prépare la variable pour la recherche
+    $recherche = ''; 
 
-    // 1. Si une recherche est lancée et n'est pas vide
-    if (isset($_GET['search']) && !empty(trim($_GET['search']))) {
+    if (isset($_GET['search'])) {
+        $mode = 'produits';
         $recherche = trim($_GET['search']);
-        $sql = "SELECT * FROM produit WHERE designation LIKE :recherche";
-        $stmt = $connection->prepare($sql);
-        $stmt->execute(['recherche' => '%' . $recherche . '%']);
-    } else {
-        // 2. Sinon (page d'accueil par défaut ou recherche vide), on prend TOUS les produits
-        $sql = "SELECT * FROM produit";
-        $stmt = $connection->query($sql);
+
+        if (empty($recherche)) {
+            $sql = "SELECT * FROM produit";
+            $stmt = $connection->query($sql);
+        } else {
+            $sql = "SELECT * FROM produit WHERE designation LIKE :recherche";
+            $stmt = $connection->prepare($sql);
+            $stmt->execute(['recherche' => '%' . $recherche . '%']);
+        }
+        
+        $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
-    
-    // On récupère les résultats dans tous les cas
-    $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
-    
-    // On compte combien il y a de lignes trouvées
-    $nb_results = count($results);
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -32,7 +31,7 @@
 <body>
     <header class="header">
         <div class="header-content">
-            <a href="accueilLaFleur.php" class="logo">La<span class="logo-pink">Fleur</span></a>
+            <a href="accueilLafleur.php" class="logo">La<span class="logo-pink">Fleur</span></a>
             <h1>Bienvenue Chez la <span class="logo-pink">Fleur</span></h1>
         
             <div class="right-header">
@@ -48,50 +47,85 @@
         </div>
     </header>
 
-    <section class="produits">
+    <section class="produits" style="padding-bottom: 0;">
         <h2>Rechercher un produit</h2>
-
-        <form action="" method="GET" class="search-form">
+        <form action="accueilLafleur.php" method="GET" class="search-form">
             <input type="text" name="search" placeholder="Que cherches-tu ?" value="<?php echo htmlspecialchars($recherche); ?>">
             <button type="submit">Chercher</button>
         </form>
-
-        <div class="results-container">
-            <?php 
-                // Petite astuce pour mettre un "s" seulement si on a plus d'un résultat
-                $s = ($nb_results > 1) ? 's' : ''; 
-            ?>
-
-            <?php if (!empty($recherche)): ?>
-                <h3><?php echo $nb_results; ?> résultat<?php echo $s; ?> pour "<?php echo htmlspecialchars($recherche); ?>" :</h3>
-            <?php else: ?>
-                <h3>Tous nos produits (<?php echo $nb_results; ?> article<?php echo $s; ?>) :</h3>
-            <?php endif; ?>
-
-            <?php if ($nb_results > 0): ?>
-                <?php foreach ($results as $row): ?>
-                    <div class="result-item" style="display: flex; gap: 15px; align-items: center;">
-                        
-                        <img src="image/<?php echo htmlspecialchars($row['photo']); ?>" alt="<?php echo htmlspecialchars($row['designation']); ?>" style="width: 80px; height: 80px; object-fit: cover; border-radius: 8px;">
-                        
-                        <div>
-                            <strong>
-                                <a href="produit.php?id=<?php echo htmlspecialchars($row['reference']); ?>" style="color: #333; text-decoration: none; font-size: 1.2rem;">
-                                    <?php echo htmlspecialchars($row['designation']); ?>
-                                </a>
-                            </strong>
-                            <p style="color: #ec4899; font-weight: bold; margin: 5px 0;"><?php echo htmlspecialchars($row['prix']); ?> €</p>
-                            <a href="produit.php?id=<?php echo htmlspecialchars($row['reference']); ?>" style="color: #6b7280; font-size: 0.9rem; text-decoration: underline;">Voir le produit</a>
-                        </div>
-                        
-                    </div>
-                <?php endforeach; ?>
-            <?php else: ?>
-                <p class="no-result">Désolé, aucun résultat trouvé pour cette recherche.</p>
-            <?php endif; ?>
-            
-        </div>
     </section>
+
+    <?php if ($mode === 'categories'): ?>
+        
+        <section class="categories">
+            <h2>Nos Catégories</h2>
+            <div class="grid">
+                <a href="categorie.php?id=bulbes" class="card">
+                    <img src="https://images.unsplash.com/photo-1773322524707-77c64c75247b?w=600" alt="Bulbes">
+                    <div class="card-body">
+                        <h3>Bulbes</h3>
+                        <p>Bulbes de fleurs à planter pour un jardin coloré</p>
+                    </div>
+                </a>
+                <a href="categorie.php?id=plante-massif" class="card">
+                    <img src="https://images.unsplash.com/photo-1715716958289-8d87eb9753f8?w=600" alt="Plante à massif">
+                    <div class="card-body">
+                        <h3>Plante à massif</h3>
+                        <p>Plantes pour créer de magnifiques massifs dans votre jardin</p>
+                    </div>
+                </a>
+                <a href="categorie.php?id=rosier" class="card">
+                    <img src="https://images.unsplash.com/photo-1687226690518-d6470e541c1e?w=600" alt="Rosier">
+                    <div class="card-body">
+                        <h3>Rosier</h3>
+                        <p>Rosiers de qualité pour embellir votre espace extérieur</p>
+                    </div>
+                </a>
+            </div>
+        </section>
+
+    <?php else: ?>
+
+        <section class="produits" style="padding-top: 0;">
+            <div class="results-container">
+                
+                <a href="accueilLafleur.php" style="display: inline-block; margin-bottom: 20px; color: #6b7280; text-decoration: none; font-weight: bold;">← Retour aux catégories</a>
+
+                <?php 
+                    $nb_results = count($results);
+                    $s = ($nb_results > 1) ? 's' : ''; 
+                ?>
+
+                <?php if (!empty($recherche)): ?>
+                    <h3><?php echo $nb_results; ?> résultat<?php echo $s; ?> pour "<?php echo htmlspecialchars($recherche); ?>" :</h3>
+                <?php else: ?>
+                    <h3>Tous nos produits (<?php echo $nb_results; ?> article<?php echo $s; ?>) :</h3>
+                <?php endif; ?>
+
+                <?php if ($nb_results > 0): ?>
+                    <?php foreach ($results as $row): ?>
+                        <div class="result-item" style="display: flex; gap: 15px; align-items: center;">
+                            <img src="image/<?php echo htmlspecialchars($row['photo']); ?>" alt="<?php echo htmlspecialchars($row['designation']); ?>" style="width: 80px; height: 80px; object-fit: cover; border-radius: 8px;">
+                            
+                            <div>
+                                <strong>
+                                    <a href="produit.php?id=<?php echo htmlspecialchars($row['reference']); ?>" style="color: #333; text-decoration: none; font-size: 1.2rem;">
+                                        <?php echo htmlspecialchars($row['designation']); ?>
+                                    </a>
+                                </strong>
+                                <p style="color: #ec4899; font-weight: bold; margin: 5px 0;"><?php echo htmlspecialchars($row['prix']); ?> €</p>
+                                <a href="produit.php?id=<?php echo htmlspecialchars($row['reference']); ?>" style="color: #6b7280; font-size: 0.9rem; text-decoration: underline;">Voir le produit</a>
+                            </div>
+                        </div>
+                    <?php endforeach; ?>
+                <?php else: ?>
+                    <p class="no-result">Désolé, aucun résultat trouvé pour cette recherche.</p>
+                <?php endif; ?>
+                
+            </div>
+        </section>
+
+    <?php endif; ?>
 
     <footer class="footer">
         <p>&copy; 2026 LaFleur - Votre fleuriste de confiance</p>
