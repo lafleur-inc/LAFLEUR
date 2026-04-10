@@ -57,11 +57,21 @@ if (isset($_GET['id']) && !empty($_GET['id'])) {
                     </p>
 
                     <?php if ($produit['qte_stock'] > 0): ?>
-                        <a href="panier.php?action=ajouter&id=<?php echo htmlspecialchars($produit['reference']); ?>" class="btn-buy">Ajouter au panier</a>
+                        <form action="panier.php" method="GET" class="add-to-cart-form">
+                            <input type="hidden" name="action" value="ajouter">
+                            <input type="hidden" name="id" value="<?php echo htmlspecialchars($produit['reference']); ?>">
+                            
+                            <div class="quantity-wrapper">
+                                <label for="quantite">Quantité :</label>
+                                <input type="number" id="quantite" name="quantite" value="1" min="1" max="<?php echo $produit['qte_stock']; ?>" required>
+                            </div>
+                            
+                            <button type="submit" class="btn-buy" style="border: none; cursor: pointer;">Ajouter au panier</button>
+                        </form>
                     <?php else: ?>
-                        <button class="btn-buy" style="background-color: #ccc; cursor: not-allowed;" disabled>Indisponible</button>
+                        <button class="btn-buy" style="background-color: #ccc; cursor: not-allowed; border: none;" disabled>Indisponible</button>
                     <?php endif; ?>
-                </div>
+                    </div>
             </div>
         <?php else: ?>
             <div class="error-message">
@@ -70,7 +80,7 @@ if (isset($_GET['id']) && !empty($_GET['id'])) {
                 <a href="accueilLaFleur.php">Retour à la page de recherche</a>
             </div>
         <?php endif; ?>
-    </section class="product-section">
+    </section>
 
     <footer class="footer">
         <p>&copy; 2026 LaFleur - Votre fleuriste de confiance</p>
