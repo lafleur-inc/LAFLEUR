@@ -29,23 +29,41 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <header class="header">
-        <div class="header-content">
-            <a href="accueilLafleur.php" class="logo">La<span class="logo-pink">Fleur</span></a>
-            <h1>Bienvenue Chez la <span class="logo-pink">Fleur</span></h1>
-        
-            <div class="right-header">
-                <a href="login.php">connexion</a>    
+<header class="header">
+    <div class="header-content">
+        <a href="accueilLaFleur.php" class="logo">La<span class="logo-pink">Fleur</span></a>
+        <h1>Bienvenue Chez la <span class="logo-pink">Fleur</span></h1>
+
+        <div class="right-header">
+            <?php if (isset($_SESSION['connexion']) && $_SESSION['connexion'] === 1): ?>
+                <div style="display: flex; flex-direction: column; align-items: flex-end; gap: 5px;">
+                        <span style="font-weight: bold; color: #333;">
+                            <?php echo htmlspecialchars($_SESSION['login']); ?>
+                        </span>
+                    <span style="font-size: 0.85rem; color: #ec4899; font-weight: 600;">
+                            <?php echo $_SESSION['role'] === 'admin' ? 'Administrateur' : 'Utilisateur'; ?>
+                        </span>
+                </div>
                 <a href="login.php">
-                    <img src="https://static.vecteezy.com/ti/vecteur-libre/p1/26626361-compte-icone-vecteur-symbole-conception-illustration-vectoriel.jpg" 
-                        alt="silhouette de connexion"
-                        width="75"
-                        height="75"
+                    <img src="https://static.vecteezy.com/ti/vecteur-libre/p1/26626361-compte-icone-vecteur-symbole-conception-illustration-vectoriel.jpg"
+                         alt="silhouette de connexion"
+                         width="75"
+                         height="75"
                     />
                 </a>
-            </div>
+            <?php else: ?>
+                <a href="login.php">connexion</a>
+                <a href="login.php">
+                    <img src="https://static.vecteezy.com/ti/vecteur-libre/p1/26626361-compte-icone-vecteur-symbole-conception-illustration-vectoriel.jpg"
+                         alt="silhouette de connexion"
+                         width="75"
+                         height="75"
+                    />
+                </a>
+            <?php endif; ?>
         </div>
-    </header>
+    </div>
+</header>
 
     <section class="produits" style="padding-bottom: 0;">
         <h2>Rechercher un produit</h2>
