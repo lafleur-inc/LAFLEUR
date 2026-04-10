@@ -34,9 +34,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $_SESSION['prenom'] = $prenom;
         $_SESSION['email'] = $email;
 
-        // Analyse de présence (Exigence 19) : Log de la modification
-        // Ici, on pourrait insérer une ligne dans une table 'logs_activite'
-
         header('Location: modifier_profil.php?success=1');
         exit();
 
