@@ -31,21 +31,22 @@
 <body>
     <header class="header">
         <div class="header-content">
-            <a href="accueilLaFleur.php" class="logo">La<span class="logo-pink">Fleur</span></a>
+            <a href="accueilLafleur.php" class="logo">La<span class="logo-pink">Fleur</span></a>
             <h1>Bienvenue Chez la <span class="logo-pink">Fleur</span></h1>
         
             <div class="right-header">
                 <a href="login.php">connexion</a>    
                 <a href="login.php">
-                    <img src="https://static.vecteezy.com/ti/vecteur-libre/p1/26626361-compte-icone-vecteur-symbole-conception-illustration-vectoriel.jpg" 
-                        alt="silhouette de connexion"
-                        width="75"
-                        height="75"
+                    <img src="https://static.vecteezy.com/ti/vecteur-libre/p1/26626361-compte-icone-vecteur-symbole-conception-illustration-vectoriel.jpg"
+                         alt="silhouette de connexion"
+                         width="75"
+                         height="75"
                     />
                 </a>
-            </div>
+            <?php endif; ?>
         </div>
-    </header>
+    </div>
+</header>
 
     <section class="produits" style="padding-bottom: 0;">
         <h2>Rechercher un produit</h2>
