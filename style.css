@@ -268,3 +268,29 @@ button:hover { background-color: #218838; }
 .error-message a:hover {
     text-decoration: underline;
 }
+.add-to-cart-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-top: 15px;
+}
+.quantity-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: #333;
+}
+.quantity-wrapper input[type="number"] {
+    width: 80px;
+    padding: 8px;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    text-align: center;
+}
+.quantity-wrapper input[type="number"]:focus {
+    outline: none;
+    border-color: #ec4899;
+}

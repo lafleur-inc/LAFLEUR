@@ -36,13 +36,13 @@
 
         <div class="right-header">
             <?php if (isset($_SESSION['connexion']) && $_SESSION['connexion'] === 1): ?>
-                <div style="display: flex; flex-direction: column; align-items: flex-end; gap: 5px;">
-                        <span style="font-weight: bold; color: #333;">
-                            <?php echo htmlspecialchars($_SESSION['login']); ?>
-                        </span>
-                    <span style="font-size: 0.85rem; color: #ec4899; font-weight: 600;">
-                            <?php echo $_SESSION['role'] === 'admin' ? 'Administrateur' : 'Utilisateur'; ?>
-                        </span>
+                <div class="user-info">
+                    <span class="user-name">
+                        <?php echo htmlspecialchars($_SESSION['login']); ?>
+                    </span>
+                    <span class="user-role">
+                        <?php echo $_SESSION['role'] === 'admin' ? 'Administrateur' : 'Utilisateur'; ?>
+                    </span>
                 </div>
                 <a href="login.php">
                     <img src="https://static.vecteezy.com/ti/vecteur-libre/p1/26626361-compte-icone-vecteur-symbole-conception-illustration-vectoriel.jpg"
@@ -67,7 +67,7 @@
 
     <section class="produits" style="padding-bottom: 0;">
         <h2>Rechercher un produit</h2>
-        <form action="accueilLafleur.php" method="GET" class="search-form">
+        <form action="accueilLaFleur.php" method="GET" class="search-form">
             <input type="text" name="search" placeholder="Que cherches-tu ?" value="<?php echo htmlspecialchars($recherche); ?>">
             <button type="submit">Chercher</button>
         </form>
@@ -107,11 +107,11 @@
         <section class="produits" style="padding-top: 0;">
             <div class="results-container">
                 
-                <a href="accueilLafleur.php" style="display: inline-block; margin-bottom: 20px; color: #6b7280; text-decoration: none; font-weight: bold;">← Retour aux catégories</a>
+                <a href="accueilLaFleur.php" style="display: inline-block; margin-bottom: 20px; color: #6b7280; text-decoration: none; font-weight: bold;">← Retour aux catégories</a>
 
                 <?php 
                     $nb_results = count($results);
-                    $s = ($nb_results > 1) ? 's' : ''; 
+                    $s = ($nb_results > 1) ? 's' : '';
                 ?>
 
                 <?php if (!empty($recherche)): ?>
