@@ -7,6 +7,15 @@ include_once("fonctionPanier.php");
 $erreur = false;
 $message = '';
 
+// Messages de succès après redirection
+if (isset($_GET['success'])) {
+    if ($_GET['success'] == '1') {
+        $message = "<div class='message-success'>Article ajouté au panier avec succès.</div>";
+    } elseif ($_GET['success'] == '2') {
+        $message = "<div class='message-success'>Panier mis à jour.</div>";
+    }
+}
+
 $action = (isset($_POST['action']) ? $_POST['action'] : (isset($_GET['action']) ? $_GET['action'] : null));
 
 if ($action !== null) {
@@ -34,7 +43,8 @@ if ($action !== null) {
                         $quantite,
                         floatval($produit['prix'])
                     );
-                    $message = "<div class='message-success'>Article ajouté au panier avec succès.</div>";
+                    header('Location: panier.php?success=1');
+                    exit();
                 } else {
                     $message = "<div class='message-error'>Produit introuvable.</div>";
                 }
@@ -53,7 +63,8 @@ if ($action !== null) {
                         modifierQteArticle($_SESSION["panier"]["type"][$i], intval($q[$i]));
                     }
                 }
-                $message = "<div class='message-success'>Panier mis à jour.</div>";
+                header('Location: panier.php?success=2');
+                exit();
             }
         }
     }
