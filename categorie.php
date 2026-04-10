@@ -38,7 +38,7 @@ $categories = [
 ];
 
 $category = $categories[$category_id] ?? null;
-if (!$category) { header('Location: index.php'); exit; }
+if (!$category) { header('Location: accueilLaFleur.php'); exit; }
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -51,7 +51,7 @@ if (!$category) { header('Location: index.php'); exit; }
 <body>
     <header class="header">
     <div class="header-content">
-        <a href="index.php" class="logo">La<span class="logo-pink">Fleur</span></a>
+        <a href="accueilLaFleur.php" class="logo">La<span class="logo-pink">Fleur</span></a>
         
         <!-- Bloc du bouton de connexion -->
         <div>
@@ -74,7 +74,7 @@ if (!$category) { header('Location: index.php'); exit; }
 </header>
 
     <div class="container">
-        <a href="index.php" class="back">← Retour aux catégories</a>
+        <a href="accueilLaFleur.php" class="back">← Retour aux catégories</a>
         
         <div class="hero">
             <img src="<?php echo $category['image']; ?>" alt="<?php echo $category['name']; ?>">

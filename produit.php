@@ -26,7 +26,7 @@ if (isset($_GET['id']) && !empty($_GET['id'])) {
 <body>
     <header class="header">
         <div class="header-content">
-            <a href="index.php" class="logo">La<span class="logo-pink">Fleur</span></a>      
+            <a href="accueilLaFleur.php" class="logo">La<span class="logo-pink">Fleur</span></a>      
             <div class="right-header">
                 <a href="login.php">connexion</a>    
                 <a href="login.php">
