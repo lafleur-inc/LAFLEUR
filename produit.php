@@ -70,7 +70,7 @@ if (isset($_GET['id']) && !empty($_GET['id'])) {
                 <a href="accueilLaFleur.php">Retour à la page de recherche</a>
             </div>
         <?php endif; ?>
-    </section>section class="product-section">
+    </section class="product-section">
 
     <footer class="footer">
         <p>&copy; 2026 LaFleur - Votre fleuriste de confiance</p>
