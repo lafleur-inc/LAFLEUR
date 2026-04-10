@@ -13,7 +13,7 @@
 <body>
     <header class="header">
     <div class="header-content">
-        <a href="index.php" class="logo">La<span class="logo-pink">Fleur</span></a>
+        <a href="accueilLaFleur.php" class="logo">La<span class="logo-pink">Fleur</span></a>
         <!-- Bloc du bouton de connexion -->
         <div>
             <?php if (isset($_SESSION['connexion']) && $_SESSION['connexion'] == 1): ?>
