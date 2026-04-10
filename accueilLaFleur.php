@@ -31,7 +31,7 @@
 <body>
     <header class="header">
         <div class="header-content">
-            <a href="accueilLafleur.php" class="logo">La<span class="logo-pink">Fleur</span></a>
+            <a href="accueilLaFleur.php" class="logo">La<span class="logo-pink">Fleur</span></a>
             <h1>Bienvenue Chez la <span class="logo-pink">Fleur</span></h1>
         
             <div class="right-header">
@@ -49,7 +49,7 @@
 
     <section class="produits" style="padding-bottom: 0;">
         <h2>Rechercher un produit</h2>
-        <form action="accueilLafleur.php" method="GET" class="search-form">
+        <form action="accueilLaFleur.php" method="GET" class="search-form">
             <input type="text" name="search" placeholder="Que cherches-tu ?" value="<?php echo htmlspecialchars($recherche); ?>">
             <button type="submit">Chercher</button>
         </form>
@@ -89,7 +89,7 @@
         <section class="produits" style="padding-top: 0;">
             <div class="results-container">
                 
-                <a href="accueilLafleur.php" style="display: inline-block; margin-bottom: 20px; color: #6b7280; text-decoration: none; font-weight: bold;">← Retour aux catégories</a>
+                <a href="accueilLaFleur.php" style="display: inline-block; margin-bottom: 20px; color: #6b7280; text-decoration: none; font-weight: bold;">← Retour aux catégories</a>
 
                 <?php 
                     $nb_results = count($results);
