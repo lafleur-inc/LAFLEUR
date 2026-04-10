@@ -26,11 +26,21 @@ if (isset($_GET['id']) && !empty($_GET['id'])) {
 <body>
     <header class="header">
         <div class="header-content">
-            <a href="accueilLafleur.php" class="logo">La<span class="logo-pink">Fleur</span></a>
+            <a href="accueilLafleur.php" class="logo">La<span class="logo-pink">Fleur</span></a>      
+            <div class="right-header">
+                <a href="login.php">connexion</a>    
+                <a href="login.php">
+                    <img src="https://static.vecteezy.com/ti/vecteur-libre/p1/26626361-compte-icone-vecteur-symbole-conception-illustration-vectoriel.jpg" 
+                        alt="silhouette de connexion"
+                        width="75"
+                        height="75"
+                    />
+                </a>
+            </div>
         </div>
     </header>
 
-    <main>
+    <section class="product-section">
         <?php if ($produit): ?>
             <div class="product-container">
                 <img src="image/<?php echo htmlspecialchars($produit['photo'] ?? 'placeholder.jpg'); ?>" alt="<?php echo htmlspecialchars($produit['designation']); ?>" class="product-image">
@@ -42,7 +52,7 @@ if (isset($_GET['id']) && !empty($_GET['id'])) {
                     
                     <p class="product-description"><?php echo nl2br(htmlspecialchars($produit['description'] ?? 'Aucune description disponible.')); ?></p>
                     
-                    <p style="margin-top: 10px; color: <?php echo ($produit['qte_stock'] > 0) ? '#28a745' : '#dc3545'; ?>;">
+                    <p style="margin-top: 10px; font-weight: bold; color: <?php echo ($produit['qte_stock'] > 0) ? '#28a745' : '#dc3545'; ?>;">
                         <?php echo ($produit['qte_stock'] > 0) ? 'En stock (' . htmlspecialchars($produit['qte_stock']) . ')' : 'Rupture de stock'; ?>
                     </p>
 
@@ -57,10 +67,10 @@ if (isset($_GET['id']) && !empty($_GET['id'])) {
             <div class="error-message">
                 <h2>Produit introuvable.</h2>
                 <p>Le produit que vous cherchez n'existe pas</p>
-                <a href="recherche.php">Retour à la page de recherche</a>
+                <a href="accueilLaFleur.php">Retour à la page de recherche</a>
             </div>
         <?php endif; ?>
-    </main>
+    </section>section class="product-section">
 
     <footer class="footer">
         <p>&copy; 2026 LaFleur - Votre fleuriste de confiance</p>
